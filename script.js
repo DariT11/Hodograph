@@ -24,7 +24,6 @@ window.onload = function() {
     canvas.onmouseup = onCanvasMouseUp;
     canvas.oncontextmenu = e => e.preventDefault();
 
-    // Resize
     document.getElementById("btnResizeCanvas").onclick = () => {
         let w = parseInt(document.getElementById("inputWidth").value);
         let h = parseInt(document.getElementById("inputHeight").value);
