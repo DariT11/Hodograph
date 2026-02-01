@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.controls {
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    margin: 10px auto;
+    width: 90%;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.controls h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.controls label {
+    display: block;
+    margin: 5px 0;
+}
+
+.controls input[type=range] {
+    width: 200px;
+}
+
+.controls button {
+    margin: 5px 5px 10px 0;
+}
+
+canvas {
+    border: 1px solid #333;
+    margin: 10px 0;
+    background-color: #fff;
+}
+
+.legend, .instructions {
+    text-align: left;
+    margin: 10px auto;
+    max-width: 800px;
+}
+
+.color-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.color-box.black { background-color: black; }
+.color-box.orange { background-color: orange; }
+.color-box.red { background-color: red; }
+.color-box.blue { background-color: blue; }
+.color-box.green { background-color: green; }
+
+.info-bar {
+    text-align: center;
+    margin: 10px;
+}
