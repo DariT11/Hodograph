@@ -1,6 +1,5 @@
-# Hodograph
+# Bezier Hodograph Visualizer
 Криви на Безие – Компютърно геометрично моделиране
-Bezier Hodograph Visualizer
 
 Същност на приложението:
 
