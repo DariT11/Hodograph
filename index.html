@@ -1,73 +1,71 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <title>Криви на Безие - Компютърно геометрично моделиране</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Криви на Безие - de Casteljau (КГМ)</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h2>Криви на Безие - Компютърно геометрично моделиране</h2>
+  <div class="container">
+    <h2>Криви на Безие - Компютърно геометрично моделиране</h2>
 
-        <!-- Контроли -->
-        <div class="controls">
-            <h3>Настройки на канваса</h3>
-            <label>Ширина (px): <input type="number" id="inputWidth" value="800" min="100" max="2000"></label>
-            <label>Височина (px): <input type="number" id="inputHeight" value="600" min="100" max="2000"></label>
-            <button id="btnResizeCanvas">Промени размера</button>
+    <div class="controls">
+      <h3>Контроли</h3>
 
-            <h3>Ходограф</h3>
-            <label><input type="checkbox" id="chkShowDerivative" checked> Показвай ходографа</label>
-            <label>Hodograph Scale: <input type="range" id="hodographScale" min="0.1" max="2" step="0.1" value="1.0"> <span id="lblHodoScale">1.0</span></label>
+      <label class="row">
+        <input type="checkbox" id="chkAnimate" />
+        <span>Анимация по кривата</span>
+      </label>
 
-            <h3>Анимация и сегменти</h3>
-            <label><input type="checkbox" id="chkAnimate"> Пусни анимация</label>
-            <label>Скорост на анимация: <input type="range" id="animSpeed" min="0.1" max="5" step="0.1" value="1"> <span id="lblAnimSpeed">1</span>x</label>
-            <button id="btnAddSegment">Добави сегмент</button>
-            <button id="btnRemoveSegment">Премахни сегмент</button>
+      <label class="row">
+        <span>Скорост:</span>
+        <input type="range" id="animSpeed" min="0.5" max="5" step="0.5" value="1" />
+        <span class="mono"><span id="lblSpeed">1</span>x</span>
+      </label>
 
-            <h3>De Casteljau</h3>
-            <label><input type="checkbox" id="chkShowCasteljau"> Показвай междинните стъпки</label>
-            <button id="btnExportSVG">Експорт към SVG</button>
-        </div>
+      <label class="row">
+        <input type="checkbox" id="chkShowCasteljau" checked />
+        <span>Показвай стъпките на de Casteljau</span>
+      </label>
 
-        <!-- Canvas -->
-        <canvas id="canvas" width="800" height="600"></canvas>
+      <label class="row">
+        <input type="checkbox" id="chkShowHodograph" checked />
+        <span>Показвай ходографа (B'(t))</span>
+      </label>
 
-        <!-- Легенда -->
-        <div class="legend">
-            <h3>Легенда</h3>
-            <p><span class="color-box black"></span>Контролен полигон</p>
-            <p><span class="color-box orange"></span>Опорни точки</p>
-            <p><span class="color-box red"></span>Безие крива</p>
-            <p><span class="color-box blue"></span>Ходограф (производна)</p>
-            <p><span class="color-box green"></span>Скорост / допирателна при t</p>
-        </div>
+      <div class="btn-row">
+        <button id="btnAddSegment" type="button">Добави сегмент</button>
+        <button id="btnRemoveSegment" type="button">Премахни сегмент</button>
+      </div>
 
-        <!-- Информационна лента -->
-        <div class="info-bar">
-            <span id="infoLength">Length: 0</span>
-            <span id="infoTValue">t = 0.00</span>
-            <span id="infoCurvature">Curvature: 0.00</span>
-        </div>
-
-        <!-- Плъзгач за t -->
-        <div style="width: 400px; margin: 0 auto;">
-            <label for="sliderT">t:
-                <input type="range" id="sliderT" min="0" max="1" step="0.01" value="0">
-            </label>
-        </div>
-
-        <!-- Инструкции -->
-        <div class="instructions">
-            <strong>Указания:</strong><br>
-            • Shift+Ляв клик => добавя нова опорна точка в последния сегмент.<br>
-            • Десен клик => трие най-близката опорна точка.<br>
-            • Ляв клик + drag => местиш опорна точка (оранжева).<br>
-            • Ходографът (син) се рисува, а зелената допирателна показва скоростта при t.<br>
-        </div>
+      <div class="btn-row">
+        <button id="btnReset" type="button" class="primary">Reset</button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <canvas id="canvas" width="800" height="500"></canvas>
+
+    <div class="info-bar">
+      <span id="infoT">t = 0.00</span>
+      <span id="infoLength">Length ≈ 0 px</span>
+      <span id="infoCurvature">Curvature ≈ 0</span>
+    </div>
+
+    <div class="analysis">
+      <h3>Анализ на кривата (Скорост и Кривина)</h3>
+      <canvas id="analysisCanvas" width="800" height="250"></canvas>
+    </div>
+
+    <div class="instructions">
+      <strong>Указания:</strong><br />
+      • Shift + ляв клик → добавяне на точка<br />
+      • Ляв клик + drag → местене на точка<br />
+      • Десен клик → изтриване на най-близка точка (мин. 2 точки на сегмент)<br />
+      • Reset → връща примерна конфигурация на сегментите
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
